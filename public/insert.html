@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="app.js"></script>
+    <title>InsertData</title>
+
+    <style>
+        body {
+            text-align: center;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url("pic/ht3.jpg");
+        }
+        
+        #enterDetails {padding-top: 20px; padding-bottom: 20px; border-radius:30px ;width: 100%;  background-color: #393939db; color: floralwhite; margin-bottom: 35px;}
+        #findDetails {padding-top: 20px; padding-bottom: 20px; border-radius:30px; width: 100%; background-color: #989898a8; color: #080808f6;}
+        
+        .mainContainer{
+            margin :30px 70px;
+        }
+        input {
+            background-color: #ffffff;
+            padding: 5px 5px;
+            border-radius: 10px;
+            border: none;
+        }
+        .find-button { 
+            background-color: #393939f5;
+            color: #fff; /* White text color */
+            border: none;
+            padding: 5px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .find-button:hover {
+            background-color: #39393991; /* Darker red color */
+        }
+        .insert-button { 
+            background-color: #faf7f1;
+            color: #000000; /* White text color */
+            border: none;
+            padding: 5px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .insert-button:hover {
+            background-color: #ccc6bb; /* Darker red color */
+        }
+
+        .animate-bottom {
+    position: relative;
+    -webkit-animation-name: animatebottom;
+    -webkit-animation-duration: 1s;
+    animation-name: animatebottom;
+    animation-duration: 1s
+  }
+  
+  @-webkit-keyframes animatebottom {
+    from { bottom:-100px; opacity:0 } 
+    to { bottom:0px; opacity:1 }
+  }
+  
+  @keyframes animatebottom { 
+    from{ bottom:-100px; opacity:0 } 
+    to{ bottom:0; opacity:1 }
+  }
+    </style>
+</head>
+<body>
+<div class="animate-bottom">
+    <div class="mainContainer">
+        
+
+            <div id="enterDetails">
+            
+                <h3>Insert Infomation</h3>
+                <h5>Room Number</h5> 
+                <input class="input" id="RoomID" type="text"> 
+
+                <h6>Name</h6> 
+                <input class="input" id="enterName" type="text"> 
+
+                <h6>Check In</h6> 
+                <input class="input" id="enIn" type="text">
+                
+                <h6>Check Out</h6> 
+                <input class="input" id="enOut" type="text">
+                
+                <h6>Phone Number</h6> 
+                <input class="input" id="enPhone" type="text">
+                
+                <h6>LoginPassword</h6> 
+                <input class="input" id="enLog" type="text">
+                
+                <h6>Door1</h6> 
+                <input class="input" id="enDoor" type="number"><br><br>
+                <div>
+                    <button class="insert-button" id="insert">INSERT</button>
+                    <button class="insert-button" id="update">UPDATE</button><br><br>
+                    <button class="insert-button" id="remove">REMOVE</button> <br><br>
+                </div>      
+            </div>
+        
+            <div id="findDetails">
+                    <h3>Find Room</h3>
+                    <h5>Room Number</h5>
+                    <input id="FindRoomID" type="text"> <br><br>
+                    <button class="find-button" id="find">FIND</button>
+                    <h6 id="findName" type="text"></h6>
+                    <h6 id="findIn" type="text"></h6>
+                    <h6 id="findOut" type="text"></h6>
+                    <h6 id="findPhone" type="text"></h6>
+                    <h6 id="findLog" type="text"></h6>
+                    <h6 id="findDoor" type="text"></h6>  <br><br>
+            </div>
+    </div>
+</div>
+
+
+    
+
+
+<script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        // (the one where you imported "initializeApp" from),
+        //but change "firebase-app" to "firebase-database"
+        
+        const firebaseConfig = {
+        apiKey: "AIzaSyCoC356_DOCykfHBgUHHKqtZKjP4PhtBoc",
+        authDomain: "smartdoorlock-aec8c.firebaseapp.com",
+        databaseURL: "https://smartdoorlock-aec8c-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "smartdoorlock-aec8c",
+        storageBucket: "smartdoorlock-aec8c.appspot.com",
+        messagingSenderId: "336953955441",
+        appId: "1:336953955441:web:c4968f74b196dc7be4f7d0",
+        measurementId: "G-0CK8WN3CB5"
+        };
+
+        import {getDatabase, ref, get, set, child, update, remove} from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js"; //Copy and Paste the URL from near the top of the CDN you pasted in from firebase
+
+        const app = initializeApp(firebaseConfig);
+        // const analytics = getAnalytics(app);
+        const db = getDatabase();
+
+        var enterRoom = document.querySelector("#enterRoom");
+        var enterName = document.querySelector("#enterName");
+        var enIn = document.querySelector("#enIn");
+        var enOut = document.querySelector("#enIn");
+        var enPhone = document.querySelector("#enPhone");
+        var enLog = document.querySelector("#enLog");
+        var enDoor = document.querySelector("#enDoor");
+
+        var RoomID = document.querySelector("#RoomID");
+        var FindRoomID = document.querySelector("#FindRoomID")
+        var findName = document.querySelector("#findName");
+        var findIn = document.querySelector("#findIn");
+        var findOut = document.querySelector("#findOut");
+        var findPhone = document.querySelector("#findPhone");
+        var findLog = document.querySelector("#findLog");
+        var findDoor = document.querySelector("#findDoor");
+      
+
+        var insertBtn = document.querySelector("#insert");
+        var updateBtn = document.querySelector("#update");
+        var removeBtn = document.querySelector("#remove");
+        var findBtn = document.querySelector("#find");
+        function InsertData() {
+            if(RoomID.value!=""){
+                set(ref(db, "Hotel/" + RoomID.value),{
+                        Name : enterName.value,
+                        CheckIn : enIn.value,
+                        CheckOut : enOut.value,
+                        PhoneNumber : enPhone.value,
+                        LoginPassword : enLog.value,
+                        Door1 : enDoor.value
+                    })
+                    .then(()=>{
+                        alert("Data added successfully");
+                    })
+                    .catch((error)=>{
+                        alert(error);
+                    });
+            }else alert("Please fill Room Number");
+        }
+
+        function FindData() {
+            
+            const dbref = ref(db);
+            get(child(dbref, "Hotel/" + FindRoomID.value)).then((snapshot)=>{
+
+                    findName.innerHTML = "Name: " + snapshot.val().Name
+                    findIn.innerHTML = "CheckIn: " + snapshot.val().CheckIn
+                    findOut.innerHTML = "CheckOut: " + snapshot.val().CheckOut
+                    findPhone.innerHTML = "PhoneNumber: " + snapshot.val().PhoneNumber
+                    findLog.innerHTML = "LoginPassword: " + snapshot.val().LoginPassword
+                    findDoor.innerHTML = "Door Status: " + snapshot.val().Door1
+                    
+            })
+            .catch((error)=>{
+                alert("Data not found");
+            })
+            
+        }
+
+        function UpdateData(){
+            if(RoomID.value!=""){
+                update(ref(db, "Hotel/"+ RoomID.value),{
+                    Name : enterName.value,
+                    CheckIn : enIn.value,
+                    CheckOut : enOut.value,
+                    PhoneNumber : enPhone.value,
+                    LoginPassword : enLog.value,
+                    Door1 : enDoor.value
+                })
+                .then(()=>{
+                    alert("Data updated successfully");
+                })
+                .catch((error)=>{
+                    alert(error);
+                });
+            }else alert("Please fill Room Number");
+        }
+
+        function RemoveData(){
+            if(RoomID.value!=""){
+                remove(ref(db, "Hotel/"+ RoomID.value))
+                .then(()=>{
+                    alert("Data deleted successfully");
+                })
+                .catch((error)=>{
+                    alert(error);
+                });
+            }else alert("Please fill Room Number")
+        }
+
+        insertBtn.addEventListener('click', InsertData);
+        updateBtn.addEventListener('click', UpdateData);
+        removeBtn.addEventListener('click', RemoveData);
+        findBtn.addEventListener('click', FindData);
+
+</script>
+</body>
+</html>

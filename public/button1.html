@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel Room Control</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<link rel="stylesheet" href="stylebutton.css">
+<script src="app.js"></script>
+<script src="firebase.js" type="module"></script>
+
+</head>
+<body>
+
+  <div class="container">
+    <div id="roomInfo">
+      <h2 id="RoomNumber">Room1</h2>
+      <h3 id="Name"></h3>
+    </div>
+
+    <div id="lockUnlockButton">
+      <button id="toggleUnlock" onclick="toggleButton()">
+        <i class="fas fa-lock-open"></i>
+      </button><br>
+      <button id="toggleLock" onclick="toggleButton()" disabled>
+        <i class="fas fa-lock"></i>
+      </button><br>
+
+      <p id="lockStatus"></p>
+
+    </div>
+
+    <div id="dateInfo">
+      <p id="checkIn" ></p>
+      <p id="checkOut"></p>
+    </div>
+
+  </div>
+<script >
+
+  var isLocked = true;
+  const toggleUnlock = document.getElementById('toggleUnlock');
+  const toggleLock = document.getElementById('toggleLock');
+  var lockStatus = document.getElementById("lockStatus");
+
+  function toggleButton() {
+  // Toggle the disabled property of the buttons
+  
+  toggleLock.disabled = !toggleLock.disabled;
+  toggleUnlock.disabled = !toggleUnlock.disabled;
+
+  isLocked = !isLocked;
+  if(isLocked){
+    lockStatus.textContent = "Door is Locked";
+  }else{
+    lockStatus.textContent = "Door is Unlocked";
+  }
+  
+
+}
+
+</script>
+
+</body>
+</html>

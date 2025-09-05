@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Hotel Management</title>
+    <link rel="stylesheet" href="styleInfo.css">
+    <script src="app.js"></script>
+    <script type="module" src="firebase.js"></script>
+
+   
+
+</head>
+<body>
+<div class="animate-bottom">
+    <h1>User Data</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Room</th>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Login Password</th>
+            </tr>
+        </thead>
+        <tbody id="tbody1">
+            
+        </tbody>
+    </table>
+    
+    <!-- Exit Button Container -->
+    <div class="exit-button-container">
+        <!-- Exit Button -->
+        <button class="exit-button" onclick="redirectTofont()">Exit</button>
+                <button class="manage-button" onclick="redirectToinsert()">Manage Data</button>
+
+    </div>
+    <div class="manage-button-container">
+        <!-- Exit Button -->
+    </div>
+</div>
+<script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        // (the one where you imported "initializeApp" from),
+        //but change "firebase-app" to "firebase-database"
+        
+        const firebaseConfig = {
+        apiKey: "AIzaSyCoC356_DOCykfHBgUHHKqtZKjP4PhtBoc",
+        authDomain: "smartdoorlock-aec8c.firebaseapp.com",
+        databaseURL: "https://smartdoorlock-aec8c-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "smartdoorlock-aec8c",
+        storageBucket: "smartdoorlock-aec8c.appspot.com",
+        messagingSenderId: "336953955441",
+        appId: "1:336953955441:web:c4968f74b196dc7be4f7d0",
+        measurementId: "G-0CK8WN3CB5"
+        };
+
+        import {getDatabase, ref, get, set, child, update, remove, onValue} from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js"; //Copy and Paste the URL from near the top of the CDN you pasted in from firebase
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        // const analytics = getAnalytics(app);
+        const db = getDatabase();
+        var toggleUnlock = document.querySelector("#toggleUnlock");
+        var toggleLock = document.querySelector("#toggleLock");
+
+        // fontinfo table
+    function AddItemToTable(Room, Name,PhoneNumber,CheckIn,ChechOut,LoginPassword){
+        var tbody = document.getElementById('tbody1');
+        var trow = document.createElement("tr");
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        var td3 = document.createElement("td");
+        var td4 = document.createElement("td");
+        var td5 = document.createElement("td");
+        var td6 = document.createElement("td");
+
+        td1.innerHTML = Room;
+        td2.innerHTML = Name;
+        td3.innerHTML = PhoneNumber;
+        td4.innerHTML = CheckIn;
+        td5.innerHTML = ChechOut;
+        td6.innerHTML = LoginPassword;
+
+        trow.appendChild(td1);
+        trow.appendChild(td2);
+        trow.appendChild(td3);
+        trow.appendChild(td4);
+        trow.appendChild(td5);
+        trow.appendChild(td6);
+        tbody.appendChild(trow);
+    }
+
+    // function AddAllItemToTable(Hotel,key){
+    //     Hotel.forEach(element => {
+    //         AddItemToTable(element.Room, element.Name, element.PhoneNumber, element.CheckIn, element.CheckOut, element.LoginPassword);
+    //     });
+    // }
+    function AddAllItemToTable(Hotel){
+
+        Hotel.forEach(element => {
+            AddItemToTable(element.key, element.Name, element.PhoneNumber, element.CheckIn, element.CheckOut, element.LoginPassword);
+        });
+        
+    }
+
+    function GetAllData() {
+        const dbref = ref(db, "Hotel");
+        onValue(dbref,(snapshot)=>{
+            var Hotel = [];
+            snapshot.forEach(childSnapshot => {
+                const item = childSnapshot.val();
+                item.key = childSnapshot.key;
+                Hotel.push(item);
+            });
+            AddAllItemToTable(Hotel);
+        })
+       
+    }
+
+
+    window.onload = GetAllData();
+</script>
+</body>
+</html>

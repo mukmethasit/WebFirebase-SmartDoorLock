@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page in HTML</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js"></script>
+    <!-- <script src="firebase.js" type="module"></script> -->
+
+</head>
+<body>
+    <div class="animate-bottom">
+         <div class="headingsContainer">
+            <!-- Main container for all inputs -->
+            <div class="mainContainer">
+                <h3>User Login</h3>
+                <!-- Username -->
+                <div class="subcontainer">
+                    <label for="roomnumber">Room Number</label>
+                    <input id="roomnumber" type="text" placeholder="Room Number" >
+                    <br><br>
+                    <!-- Password -->
+                    <label for="password">Password</label>
+                    <input id="password" type="password" placeholder="Enter Password" >
+                </div>
+                    <!-- sub container for the checkbox and forgot password link -->
+                    <!-- <div class="subcontainer1">
+                            <input type="checkbox" onclick="togglePasswordVisibility()"> Show Password
+                    </div>  -->
+                <!-- Submit button -->
+                <button type="button" id="loginBtn">Login</button>
+
+                <span class="label danger" id="LogAlert"></span>
+
+                <p class="register">If you  don't have your password, please contact hotel.</p>
+
+                <p class="forgotpsd"> <a href="font.html" style="color : rgb(118, 118, 119)">Are you an employee?</a></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script type="module">
+             import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        // (the one where you imported "initializeApp" from),
+        //but change "firebase-app" to "firebase-database"
+        
+        const firebaseConfig = {
+        apiKey: "AIzaSyCoC356_DOCykfHBgUHHKqtZKjP4PhtBoc",
+        authDomain: "smartdoorlock-aec8c.firebaseapp.com",
+        databaseURL: "https://smartdoorlock-aec8c-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "smartdoorlock-aec8c",
+        storageBucket: "smartdoorlock-aec8c.appspot.com",
+        messagingSenderId: "336953955441",
+        appId: "1:336953955441:web:c4968f74b196dc7be4f7d0",
+        measurementId: "G-0CK8WN3CB5"
+        };
+
+        import {getDatabase, ref, get, set, child, update, remove} from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js"; //Copy and Paste the URL from near the top of the CDN you pasted in from firebase
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        // const analytics = getAnalytics(app);
+        const db = getDatabase();
+        function FindData() {
+            var roomnumber = document.getElementById("roomnumber").value;
+            var password = document.getElementById("password").value;
+            const dbRef = ref(getDatabase());
+                get(child(dbRef, 'Hotel/' + roomnumber)).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        var tempPass = snapshot.val().LoginPassword;
+                        if(password==tempPass)
+                            redirectTobutton1();
+                        else
+                        alertLog();
+                    } else {
+                        alertLog();
+                    }
+                    }).catch((error) => {
+                        alert(error);
+            });
+        }
+        document.getElementById("loginBtn").addEventListener('click', FindData)
+
+       
+</script>
+</html>

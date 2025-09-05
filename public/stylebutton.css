@@ -1,0 +1,147 @@
+body {
+	font-family: monospace;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+  font-size: 13px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	color: white;
+	box-shadow: 0px 0px 0px #324c66;
+	height: 100vh;
+	background-image: url('pic/luxe.jpg');
+
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+p{
+  font-size: 13px;
+}
+.container{
+  
+  width: 80%;
+  height: auto;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+
+
+ 
+  background-color: #c5c5c52c;
+  text-align: center;
+  box-align: center;
+  border-radius: 30px;
+  align-items: center;
+  
+  
+}
+
+.social {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin-right: 0.5em;
+	list-style-type: none;
+	
+	li {
+		display: inline;
+		margin: 0.25em;
+	}
+	
+	svg {
+		fill: white;
+		width: 1.75em;
+		height: 1.75em;
+	}
+}
+
+.title {
+	font-size: 5em;
+	font-weight: bold;
+	margin-bottom: 0.2em;
+}
+
+.text {
+	font-size: 1.25em;
+}
+
+  
+  #roomInfo {
+    margin-bottom: 20px;
+  }
+  
+  #lockUnlockButton {
+    margin-bottom: 20px;
+  }
+  
+  #dateInfo {
+    font-size: 20px;
+  }
+  
+  button {
+    padding: 60px; /* Adjust padding to maintain the circle shape */
+    width: 60px; /* Width and height should be equal for a perfect circle */
+    height: 60px;
+    font-size: 15px;
+    color: rgb(7, 7, 7);
+    background-color: #fffefea2;
+    border: none;
+    border-radius: 50%; /* This makes the button round */
+    cursor: pointer;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  button:disabled {
+    background-color: #1c3a8d;
+    color: rgb(255, 255, 255);
+    cursor: not-allowed;
+    font-size: 45px;
+    box-shadow: 0px 0px 20px 4px rgba(53, 106, 253, 0.63);
+  }
+
+  #lockStatus {
+    display: block;
+    margin-top: 10px;
+  }
+
+  #exitButton {
+    /* display: block; */
+    margin-top: 20px;
+    
+    background-color: #3498db;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    padding: 10px 55px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+  }
+
+  #exitButton:hover {
+    background-color: #2980b9; /* Darker color on hover */
+  }
+
+@media only screen and (min-width: 1200px) {
+	.social svg {
+		height: 2.25em;
+		width: 2.25em;
+	}
+	.title {
+		font-size: 8em;
+	}
+	.text {
+		font-size: 1.5em;
+	}
+}

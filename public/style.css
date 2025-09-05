@@ -1,0 +1,157 @@
+
+input[type=text], input[type=password]{
+  width: 100%;
+  margin: 10px 0;
+  border-radius: 15px;
+  padding: 15px 30px;
+  box-sizing: border-box;
+}
+
+button {
+    background-color: #030804c3;
+    color: white;
+    padding: 18px 20px;
+    border-radius: 20px;
+    
+    margin: 7px 0;
+    width: 100%;
+    font-size: 18px;
+  }
+
+button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+body 
+{
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	color: white;
+	box-shadow: 0px 0px 0px #324c66;
+	height: 100vh;
+	background-image: url("pic/ht2.jpg");
+	/* Full height */
+  height: 100vh;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+h1{
+    text-align: center;
+}
+
+
+form{
+    width:35rem;
+    margin: auto;
+    color:whitesmoke;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(11, 15, 13, 0.582);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+.mainContainer{
+  width: auto;
+  height: auto;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  background-color: #1a1a1ab5;
+  text-align: center;
+  box-align: center;
+  border-radius: 30px;
+  align-items: center;
+  
+}
+.subcontainer{
+  text-align: start;
+  align-items: center;
+  justify-content: center;
+
+  
+}
+.subcontainer1{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: auto;
+  
+}
+
+.subcontainer a{
+  font-size: 16px;
+  margin-bottom: 12px;
+ 
+}
+
+span.forgotpsd a {
+  float: right;
+  color: whitesmoke;
+  padding-top: 16px;
+}
+
+.forgotpsd{
+  margin-left: auto;
+  color: rgb(74, 146, 235);
+  
+}
+
+.forgotpsd:link{
+  text-decoration: none;
+  
+}
+
+.register{
+  color: white;
+  text-align: center;
+}
+
+.register a{
+  color: rgb(74, 146, 235);
+}
+
+.register a:link{
+  text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+  form{
+    width: 25rem;
+  }
+
+}
+
+@media screen and (max-width: 400px) {
+  form{
+    width: 20rem;
+  }
+}
+
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
