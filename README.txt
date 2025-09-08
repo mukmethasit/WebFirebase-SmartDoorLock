@@ -1,3 +1,18 @@
+An IoT-based smart door lock system designed to work with the Hotel Management System.
+
+Hardware: ESP32, Servo Motor, Relay Module
+
+Software: Firebase (Realtime Database), Web interface
+
+Features:
+
+Remote door control via web/mobile
+
+Real-time monitoring of lock status
+
+Scalable for hotels or personal home use
+
+
 {
   "Admin": {
     "EmployeeID": "admin",
